@@ -26,7 +26,7 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
 
 <?php
    // Just load database settings
-   require_once("ormuco-test_db_settings.php");
+   require_once("include/test_db_settings.php");
 
    // The 'my_input_filter' function certifies that '$name' is not null
    $mysqli_conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
