@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `mainData`;
 CREATE TABLE `mainData` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varbinary(255) NOT NULL DEFAULT '',
