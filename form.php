@@ -105,7 +105,7 @@ function my_input_filter($data, $reqMessage='')
 // This one should be called after my_input_filter
 function check_name($my_conn,$name)
 {
-   $sel_stmt = $my_conn->prepare("SELECT name from mainData where name='?' ");
+   $sel_stmt = $my_conn->prepare("SELECT name FROM mainData WHERE name=?");
    $sel_stmt->bind_param("s", $name); 
    $sel_stmt->execute(); 
 
