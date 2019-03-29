@@ -20,6 +20,7 @@ require_once("include/useful_data.php");
 
 <?php
 // Use base function 'my_input_filter' to do a preliminary cleaning
+// The same 'my_input_filter' function certifies that '$name' is not null
 $name       = my_input_filter($_POST['name'],"<p>You must provide some content to the required field: Name.</p>");
 $favColor   = my_input_filter($_POST['favColor']);
 $catsOrDogs = my_input_filter($_POST['catsOrDogs']);
@@ -35,13 +36,21 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
    // Just load database settings
    require_once("include/test_db_settings.php");
 
-   // The 'my_input_filter' function certifies that '$name' is not null
    $mysqli_conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-           
-   // Prepare statement and execute
-   $insert_stmt = $mysqli_conn->prepare("INSERT INTO mainData (id, name, favColor, catsOrDogs) values ('', ?, ?, ?)");
-   $insert_stmt->bind_param("sss", $name, $favColor, $catsOrDogs); 
-   $insert_stmt->execute(); 
+
+   if (check_name($mysqli_conn,$name)) {
+      // Prepare statement and execute
+      $insert_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=?");
+      $insert_stmt->bind_param("sss", $name, $favColor, $catsOrDogs); 
+      $insert_stmt->execute(); 
+
+   } else {
+
+      // Prepare statement and execute
+      $insert_stmt = $mysqli_conn->prepare("INSERT INTO mainData (id, name, favColor, catsOrDogs) values ('', ?, ?, ?)");
+      $insert_stmt->bind_param("sss", $name, $favColor, $catsOrDogs); 
+      $insert_stmt->execute(); 
+   }
 
    echo "<HR><P>Current data:</P>";
 
@@ -91,6 +100,24 @@ function my_input_filter($data, $reqMessage='')
         die($reqMessage);
     }
     return $data;
+}
+
+// This one should be called after my_input_filter
+function check_name($mysqli_conn,$name)
+{
+   $insert_stmt = $mysqli_conn->prepare("SELECT name from mainData where name='?' ");
+   $insert_stmt->bind_param("s", $name); 
+   $insert_stmt->execute(); 
+
+   $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
+   $row = $result->fetch_assoc();
+
+   if ($row) {
+      return true;
+   } else {
+      return false;
+   }
+
 }
 ?>
 
