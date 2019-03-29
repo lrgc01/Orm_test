@@ -44,6 +44,7 @@ require_once("include/useful_data.php");
 </form>
 
 <?php
+require_once("include/test_db_settings.php");
 require_once("include/myfunctions.php");
 
 $mysqli_conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
