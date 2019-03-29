@@ -118,7 +118,7 @@ function check_name($my_conn,$name)
    //var_dump($row);
    if (strcmp($row["name"],$name) == 0 )
      {
-        return $row["id];
+        return $row["id"];
      } else {
         return 0;
      }
