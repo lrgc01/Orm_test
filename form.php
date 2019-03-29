@@ -112,13 +112,12 @@ function check_name($mysqli_conn,$name)
    $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
    $row = $result->fetch_assoc();
 
-   foreach ($row as $r) {
-      if ("$r" == "$name") {
+   if (strcmp($row["name"],$name) == 0 )
+     {
         return true;
      } else {
         return false;
      }
-   }
 
 }
 ?>
