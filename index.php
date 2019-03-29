@@ -19,6 +19,15 @@
 
 <HR>
 
+<?php
+// Some useful data
+echo $_SERVER['SERVER_NAME'];
+echo $_SERVER['SERVER_ADDR'];
+echo $_SERVER['REQUEST_TIME'];
+?>
+
+<HR>
+
 <form action="form.php" method="post">
 <table border="0" cellpadding="5" cellspacing="1">
  <tbody>

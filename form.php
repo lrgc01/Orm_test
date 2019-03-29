@@ -7,18 +7,27 @@ $catsOrDogs = my_input_filter($_POST['catsOrDogs']);
 
 <html>
 <style type="text/css">table{
-   display: block;
-   overflow-x: auto;
-   white-space: nowrap;
-   width: 95%;
-   background-color: #eeeeee;
-   margin-left:auto; 
-   margin-right:auto;
+display: block;
+overflow-x: auto;
+white-space: nowrap;
+width: 95%;
+background-color: #eeeeee;
+margin-left:auto; 
+margin-right:auto;
 }
 </style>
 
 <body>
 <H2>Your data</H2>
+<HR>
+<?php
+// Some useful data
+echo $_SERVER['SERVER_NAME'];
+echo $_SERVER['SERVER_ADDR'];
+echo $_SERVER['REQUEST_TIME'];
+?>
+
+<HR>
 Name: <?php echo $name; ?><br />
 Favorite Color: <?php echo $favColor; ?><br />
 Cats or dogs: <?php echo $catsOrDogs; ?><br />
