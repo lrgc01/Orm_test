@@ -103,13 +103,13 @@ function my_input_filter($data, $reqMessage='')
 }
 
 // This one should be called after my_input_filter
-function check_name($mysqli_conn,$name)
+function check_name($my_conn,$name)
 {
-   $select_stmt = $mysqli_conn->prepare("SELECT name from mainData where name='?' ");
-   $select_stmt->bind_param("s", $name); 
-   $select_stmt->execute(); 
+   $sel_stmt = $my_conn->prepare("SELECT name from mainData where name='?' ");
+   $sel_stmt->bind_param("s", $name); 
+   $sel_stmt->execute(); 
 
-   $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
+   $result = $sel_stmt->get_result(); // Binds the last executed statement as a result.
    $row = $result->fetch_assoc();
 
    echo "<p>DEBUG: " . $row["name"] . ".</p>";
