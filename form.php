@@ -113,7 +113,7 @@ function check_name($mysqli_conn,$name)
    $row = $result->fetch_assoc();
 
    echo "<p>DEBUG: " . $row["name"] . ".</p>";
-   var_dump_$row);
+   var_dump($row);
    if (strcmp($row["name"],$name) == 0 )
      {
         return true;
