@@ -43,7 +43,16 @@ require_once("include/useful_data.php");
 <p><input type="submit" value="Submit"></p>
 </form>
 
-<HR>
+<?php
+require_once("include/myfunctions.php");
+
+$mysqli_conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+
+print_current_data($mysqli_conn);
+
+$mysqli_conn->close();
+
+?>
 
 </body>
 </html>

@@ -32,5 +32,39 @@ function check_name($my_conn,$name)
      }
 
 }
-?>
 
+function print_current_data($mysqli_conn)
+{
+   echo "<HR><P>Current data:</P>";
+
+   $select_stmt = $mysqli_conn->prepare("select name, favColor, catsOrDogs from mainData");
+   $select_stmt->execute(); // Execute the statement.
+   $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
+         
+   echo "<table border=\"0\" cellpadding=\"5\" cellspacing=\"1\">
+    <tbody>";
+   echo "   <thead>
+      <tr>
+        <th>Name</th>
+        <th>Favorite Color</th>
+        <th>Cats or Dogs</th>
+      </tr>
+    </thead>";
+
+   // Fetch the Associative Array
+   while ($row = $result->fetch_assoc())
+   {   
+       echo "<tr>";
+       foreach ($row as $r)
+          {
+              print "<td>$r</td>  ";
+          }
+       print "\n<tr>\n";
+       //var_dump($row);
+   }
+   echo "   </tbody>
+</table>";
+
+}
+
+?>
