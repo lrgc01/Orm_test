@@ -112,6 +112,7 @@ function check_name($mysqli_conn,$name)
    $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
    $row = $result->fetch_assoc();
 
+   echo "<p> " . $row["name"] . "</p>";
    if (strcmp($row["name"],$name) == 0 )
      {
         return true;
