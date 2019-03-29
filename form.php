@@ -40,9 +40,9 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
 
    if (check_name($mysqli_conn,$name)) {
       // Prepare statement and execute
-      $insert_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=?");
-      $insert_stmt->bind_param("sss", $name, $favColor, $catsOrDogs); 
-      $insert_stmt->execute(); 
+      $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=?");
+      $update_stmt->bind_param("sss", $name, $favColor, $catsOrDogs); 
+      $update_stmt->execute(); 
 
    } else {
 
@@ -105,17 +105,19 @@ function my_input_filter($data, $reqMessage='')
 // This one should be called after my_input_filter
 function check_name($mysqli_conn,$name)
 {
-   $insert_stmt = $mysqli_conn->prepare("SELECT name from mainData where name='?' ");
-   $insert_stmt->bind_param("s", $name); 
-   $insert_stmt->execute(); 
+   $select_stmt = $mysqli_conn->prepare("SELECT name from mainData where name='?' ");
+   $select_stmt->bind_param("s", $name); 
+   $select_stmt->execute(); 
 
    $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
    $row = $result->fetch_assoc();
 
-   if ($row) {
-      return true;
-   } else {
-      return false;
+   foreach ($row as $r) {
+      if ("$r" == "$name") {
+        return true;
+     } else {
+        return false;
+     }
    }
 
 }
