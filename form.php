@@ -38,10 +38,12 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
 
    $mysqli_conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-   if (check_name($mysqli_conn,$name)) {
+   $id = check_name($mysqli_conn,$name);
+
+   if ($id != 0) {
       // Prepare statement and execute
-      $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=? WHERE name=?");
-      $update_stmt->bind_param("ssss", $name, $favColor, $catsOrDogs, $name); 
+      $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=? WHERE id=?");
+      $update_stmt->bind_param("ssss", $name, $favColor, $catsOrDogs, $id); 
       $update_stmt->execute(); 
 
    } else {
@@ -105,7 +107,7 @@ function my_input_filter($data, $reqMessage='')
 // This one should be called after my_input_filter
 function check_name($my_conn,$name)
 {
-   $sel_stmt = $my_conn->prepare("SELECT name FROM mainData WHERE name=?");
+   $sel_stmt = $my_conn->prepare("SELECT name,id FROM mainData WHERE name=?");
    $sel_stmt->bind_param("s", $name); 
    $sel_stmt->execute(); 
 
@@ -116,9 +118,9 @@ function check_name($my_conn,$name)
    //var_dump($row);
    if (strcmp($row["name"],$name) == 0 )
      {
-        return true;
+        return $id;
      } else {
-        return false;
+        return 0;
      }
 
 }
