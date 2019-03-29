@@ -20,7 +20,7 @@ require_once("include/useful_data.php");
 
 <?php
 // Use base function 'my_input_filter' to do a preliminary cleaning
-$name       = my_input_filter($_POST['name'],"You must provide some content to the required field: Name.");
+$name       = my_input_filter($_POST['name'],"<p>You must provide some content to the required field: Name.</p>");
 $favColor   = my_input_filter($_POST['favColor']);
 $catsOrDogs = my_input_filter($_POST['catsOrDogs']);
 ?>
