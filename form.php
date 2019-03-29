@@ -41,7 +41,7 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
    if (check_name($mysqli_conn,$name)) {
       // Prepare statement and execute
       $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=? WHERE name=?");
-      $update_stmt->bind_param("sss", $name, $favColor, $catsOrDogs, $name); 
+      $update_stmt->bind_param("ssss", $name, $favColor, $catsOrDogs, $name); 
       $update_stmt->execute(); 
 
    } else {
