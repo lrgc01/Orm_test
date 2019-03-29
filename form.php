@@ -114,7 +114,7 @@ function check_name($my_conn,$name)
    $result = $sel_stmt->get_result(); // Binds the last executed statement as a result.
    $row = $result->fetch_assoc();
 
-   echo "<p>DEBUG: " . $row["name"] . ", " . $row["id"] . ".</p>";
+   //echo "<p>DEBUG: " . $row["name"] . ", " . $row["id"] . ".</p>";
    //var_dump($row);
    if (strcmp($row["name"],$name) == 0 )
      {
