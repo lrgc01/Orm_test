@@ -1,7 +1,7 @@
 <?php
 // Some useful data
-echo "This server name: " . $_SERVER['SERVER_NAME'] . " - ";
-echo "This server address: " . $_SERVER['SERVER_ADDR'] . " - ";
-echo "Time of the request: " . $_SERVER['REQUEST_TIME'] . "</ BR>";
+echo "<I>This server name: </I>" . $_SERVER['SERVER_NAME'] . " - ";
+echo "<I>This server address: </I>" . $_SERVER['SERVER_ADDR'] . " - ";
+echo "<I>Time of the request: </I>" . $_SERVER['REQUEST_TIME'] . "</ BR>";
 ?>
 
