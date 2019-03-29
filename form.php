@@ -40,8 +40,8 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
 
    if (check_name($mysqli_conn,$name)) {
       // Prepare statement and execute
-      $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=?");
-      $update_stmt->bind_param("sss", $name, $favColor, $catsOrDogs); 
+      $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=? WHERE name=?");
+      $update_stmt->bind_param("sss", $name, $favColor, $catsOrDogs, $name); 
       $update_stmt->execute(); 
 
    } else {
@@ -112,8 +112,8 @@ function check_name($my_conn,$name)
    $result = $sel_stmt->get_result(); // Binds the last executed statement as a result.
    $row = $result->fetch_assoc();
 
-   echo "<p>DEBUG: " . $row["name"] . ".</p>";
-   var_dump($row);
+   //echo "<p>DEBUG: " . $row["name"] . ".</p>";
+   //var_dump($row);
    if (strcmp($row["name"],$name) == 0 )
      {
         return true;
