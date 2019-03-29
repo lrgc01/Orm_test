@@ -43,7 +43,7 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
    if ($id != 0) {
       // Prepare statement and execute
       $update_stmt = $mysqli_conn->prepare("UPDATE TABLE mainData set name=?, favColor=?, catsOrDogs=? WHERE id=?");
-      $update_stmt->bind_param("sssd", $name, $favColor, $catsOrDogs, $id); 
+      $update_stmt->bind_param("sssi", $name, $favColor, $catsOrDogs, $id); 
       $update_stmt->execute(); 
 
    } else {
