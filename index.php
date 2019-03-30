@@ -20,11 +20,13 @@ require_once("include/myfunctions.php");
 ?>
 
 <?php
-// Use base function 'my_input_filter' to do a preliminary cleaning
-// The same 'my_input_filter' function certifies that '$name' is not null
-$name       = my_input_filter($_POST['name']);
-$favColor   = my_input_filter($_POST['favColor']);
-$catsOrDogs = my_input_filter($_POST['catsOrDogs']);
+// Check types with filter_input_array
+// Use base function 'my_input_filter' to do some cleaning
+$my_inputs = filter_input_array(INPUT_POST, my_filter_args());
+$name       = my_input_filter($my_inputs['name']);
+$favColor   = my_input_filter($my_inputs['favColor']);
+$catsOrDogs = my_input_filter($my_inputs['catsOrDogs']);
+$delList    = $my_inputs['delList'];
 ?>
 
 <HR>
@@ -51,7 +53,6 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
 </table>
 
 <p><input type="submit" value="Submit"></p>
-</form>
 
 <HR>
 
@@ -80,11 +81,14 @@ Cats or dogs: <?php echo $catsOrDogs; ?><br />
       }
    }
 
+   data_to_delete($mysqli_conn,$delList);
+
    print_current_data($mysqli_conn);
 
    $mysqli_conn->close();
 ?>
 
+</form>
 </body>
 </html>
 
