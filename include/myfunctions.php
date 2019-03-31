@@ -70,11 +70,11 @@ function data_to_delete($my_conn,$delList)
 	}
 }
 
-function print_current_data($mysqli_conn)
+function print_current_data($my_conn)
 {
    print "<HR><P>Current data:</P>\n";
 
-   $select_stmt = $mysqli_conn->prepare("select name, favColor, catsOrDogs, id from mainData");
+   $select_stmt = $my_conn->prepare("select name, favColor, catsOrDogs, id from mainData");
    $select_stmt->execute(); // Execute the statement.
    $result = $select_stmt->get_result(); // Binds the last executed statement as a result.
          
